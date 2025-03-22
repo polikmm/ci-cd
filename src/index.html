@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" href="./assets/svg/empty-cart-icon.svg">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@200;400;500&display=swap"
+  <link rel="preconnect" href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@200;400;500&display=swap"
     rel="stylesheet">
   <title>Online-store</title>
 </head>
@@ -41,7 +41,7 @@
     </main>
     <section id="promo" class="promo">
       <div class="container">
-        <img class="promo__photo" src="assets/img/eucalypt.png" alt="eucalypt">
+        <img loading="lazy" class="promo__photo" src="assets/img/eucalypt.png" alt="eucalypt">
         <div class="promo__container">
           <h2 class="promo__title">Get <span>10% OFF</span> on your purchase</h2>
           <div class="promo__descr">Use promo codes:</div>
@@ -75,7 +75,7 @@
         <div class="footer__column">
           <p class="footer__title">RS School</p>
           <ul class="footer__list">
-            <li class="footer__item"><a href="https://rs.school/js/" target="_blank"><img class="rs-school__img"
+            <li class="footer__item"><a href="https://rs.school/js/" target="_blank"><img loading="lazy" class="rs-school__img"
                   alt="RS School logo" src="./assets/svg/rs_school.svg" width="80"></a>
             </li>
             <li class="footer__item"><span>2022</span>
@@ -361,7 +361,7 @@
   <!-- empty cart page -->
   <template id="empty-cart">
     <section class="empty-cart-page page">
-      <img class="empty-cart-page__img" src="./assets/svg/empty-cart-icon.svg" alt="empty cart icon">
+      <img loading="lazy" class="empty-cart-page__img" src="./assets/svg/empty-cart-icon.svg" alt="empty cart icon">
       <div class="empty-cart-page__block">
         <p class="empty-cart-page__text">Your cart is empty.</p>
         <a class="empty-cart__btn button" href="/catalog">Go to catalog</a>
