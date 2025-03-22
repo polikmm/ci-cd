@@ -586,7 +586,7 @@ h2 {
 }
 
 .nav__link {
-  color: #909090;
+  color: #000000;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
@@ -717,7 +717,7 @@ h2 {
 }
 
 .promo__title span {
-  color: #22795D;
+  color: #032d1f;
   font-weight: bold;
 }
 
@@ -751,7 +751,7 @@ h2 {
   width: 150px;
   height: 40px;
   background-color: #FFFFFF;
-  color: #2F8569;
+  color: #032d1f;
   border-radius: 20px;
   border: 1px #2F8569 solid;
   cursor: copy;
@@ -1178,7 +1178,7 @@ h2 {
   right: -8px;
   font-size: 17px;
   font-weight: 900;
-  color: #89c1b0;
+  color: #032d1f;
 }
 
 .product__discount {
@@ -1200,7 +1200,7 @@ h2 {
 }
 
 .product__type {
-  color: #89c1b0;
+  color: #002c1f;
 }
 
 .product__title {
@@ -1239,7 +1239,7 @@ h2 {
 .product__stock {
   margin-top: 5px;
   margin-right: 10px;
-  color: #89c1b0;
+  color: #003626;
   font-size: 0.8em;
   text-align: right;
 }
@@ -1587,6 +1587,13 @@ h2 {
   background: #22795D;
 }
 
+.slider__progress::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+}
+
 .check {
   position: relative;
   padding-left: 35px;
@@ -1615,11 +1622,11 @@ h2 {
 }
 
 .check:hover .check__input ~ .check__span {
-  background-color: #89c1b0;
+  background-color: #032d1f;
 }
 
 .check__input:checked ~ .check__span {
-  background-color: #22795D;
+  background-color: #032d1f;
   border: none;
 }
 
