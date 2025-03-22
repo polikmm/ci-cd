@@ -1,0 +1,76 @@
+name: CI/CD + Netlify Preview
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+    branches:
+      - main
+
+jobs:
+  validate:
+    if: startsWith(github.head_ref, 'feature/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build project
+        run: npm run build
+
+      - name: Upload dist folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: ./dist
+
+  deploy-netlify:
+    if: startsWith(github.head_ref, 'feature/')
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download dist folder
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: ./dist
+
+      - name: Deploy to Netlify
+        uses: jsmrcaga/action-netlify-deploy@v2.0.0
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          build_directory: ./dist
+          deploy_message: "Netlify preview from GitHub Actions"
+          draft: true
+
+  block-invalid-branches:
+    if: ${{ !startsWith(github.head_ref, 'feature/') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail on invalid branch name
+        run: |
+          echo "❌ ERROR: Branch name must start with 'feature/'"
+          exit 1
+
+  check-branch-name:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch name
+        run: |
+          BRANCH_NAME="${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}"
+          if [[ ! "$BRANCH_NAME" =~ ^feature\/ ]]; then
+            echo "❌ ERROR: Branch name must start with 'feature/'"
+            exit 1
+          fi
+        shell: bash
