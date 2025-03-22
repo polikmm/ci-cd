@@ -25,12 +25,12 @@ jobs:
 
       - name: Build project
         run: npm run build
-        
+
       - name: Check dist folder
         run: ls -la ./dist
 
       - name: Upload dist folder
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@vf61d611fb478f3d34dc7ce22dc114db19191bd61
         with:
           name: dist
           path: ./dist
