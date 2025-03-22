@@ -778,6 +778,7 @@ h2 {
       -ms-flex-align: center;
           align-items: center;
   height: 100%;
+  min-height: 100vh;
   position: relative;
 }
 
