@@ -2291,5 +2291,6 @@ h2.error-page__title {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 30px;
+  min-height: 3740px;
 }
 /*# sourceMappingURL=index.css.map */
