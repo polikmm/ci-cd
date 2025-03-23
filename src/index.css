@@ -706,6 +706,7 @@ h2 {
 .promo__photo {
   position: absolute;
   height: 350px;
+  width: 208p;
   left: 0;
   bottom: 0;
 }
