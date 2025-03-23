@@ -706,7 +706,7 @@ h2 {
 .promo__photo {
   position: absolute;
   height: 350px;
-  width: 208p;
+  width: 208px;
   left: 0;
   bottom: 0;
 }
@@ -930,6 +930,7 @@ h2 {
 
 .footer {
   width: 100%;
+  min-height: 314px;
   position: relative;
   background-color: #2F8569;
   color: #FFFFFF;
@@ -1142,6 +1143,7 @@ h2 {
       -ms-flex-align: end;
           align-items: flex-end;
   width: 100%;
+  min-width: 286px;
   height: 225px;
   padding: 10px 30px 10px 30px;
   background: url("assets/img/catalog/img_1_1.webp") bottom center no-repeat;
