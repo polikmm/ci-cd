@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -8,7 +9,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const mode = process.env.NODE_ENV || 'development';
 const devMode = mode === 'development';
 const target = devMode ? 'web' : 'browserslist';
-const devtool = devMode ? 'source-map' : undefined;
+const devtool = devMode ? 'source-map' : false;
 
 module.exports = {
   mode,
@@ -28,17 +29,21 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
   },
+  optimization: {
+    minimize: !devMode,
+    minimizer: [
+      '...', // сохранить дефолтный terser
+      new CssMinimizerPlugin(),
+    ],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
     }),
-
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
     }),
-
     new EslintPlugin({ extensions: ['ts', 'js'] }),
-
     new CopyPlugin({
       patterns: [
         { from: 'src/assets', to: 'assets' },
@@ -46,7 +51,6 @@ module.exports = {
         { from: path.resolve(__dirname, '_redirects'), to: '' },
       ],
     }),
-
     new CleanWebpackPlugin(),
   ],
   module: {
@@ -63,7 +67,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'sass-loader',
