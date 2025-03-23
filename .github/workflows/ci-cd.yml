@@ -1,0 +1,48 @@
+name: CI/CD + Netlify Preview
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    if: startsWith(github.head_ref, 'feature/')
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build project
+        run: npm run build
+
+  block-invalid-branches:
+    if: ${{ !startsWith(github.head_ref, 'feature/') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail on invalid branch name
+        run: |
+          echo "❌ ERROR: Branch name must start with 'feature/'"
+          exit 1
+
+  check-branch-name:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch name
+        run: |
+          BRANCH_NAME="${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}"
+          if [[ ! "$BRANCH_NAME" =~ ^feature\/ ]]; then
+            echo "❌ ERROR: Branch name must start with 'feature/'"
+            exit 1
+          fi
+        shell: bash
