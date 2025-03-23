@@ -2,7 +2,6 @@ name: CI/CD + Netlify Preview
 
 on:
   pull_request:
-    types: [opened, edited, synchronize]
     branches:
       - main
 
@@ -25,36 +24,6 @@ jobs:
 
       - name: Build project
         run: npm run build
-
-      - name: Check dist folder
-        run: ls -la ./dist
-
-      - name: Upload dist folder
-        uses: actions/upload-artifact@vf61d611fb478f3d34dc7ce22dc114db19191bd61
-        with:
-          name: dist
-          path: ./dist
-
-  deploy-netlify:
-    if: startsWith(github.head_ref, 'feature/')
-    needs: validate
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download dist folder
-        uses: actions/download-artifact@v3
-        with:
-          name: dist
-          path: ./dist
-
-      - name: Deploy to Netlify
-        uses: jsmrcaga/action-netlify-deploy@v2.0.0
-        with:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          build_directory: ./dist
-          deploy_message: "Netlify preview from GitHub Actions"
-          draft: true
 
   block-invalid-branches:
     if: ${{ !startsWith(github.head_ref, 'feature/') }}
