@@ -37,10 +37,8 @@
   box-shadow: variables.$shadow;
 
   @media (max-width:600px) {
-    img {
-      width: 70px;
-      height: 70px;
-    }
+    width: 70px;
+    height: 70px;
     margin-top: 20px;
   }
 
@@ -49,6 +47,13 @@
     box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px;
   }
 
+}
+
+.header__logo__img {
+  @media (max-width:600px) {
+    width: 70px;
+    height: 70px;
+  }
 }
 
 .nav {
