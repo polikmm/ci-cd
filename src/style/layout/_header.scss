@@ -8,7 +8,7 @@
 .header {
   position: relative;
   width: 100%;
-  height: 200px;
+  min-height: 200px;
   z-index: 100;
 
   @media (max-width:600px) {
@@ -25,41 +25,21 @@
 
 .header__container {
   display: flex;
+  padding-top: 30px;
 }
 
 .header__logo {
   cursor: pointer;
-  margin-top: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 155px;
   height: 155px;
   transition: .3s;
   border-radius: 100%;
-  background-color: variables.$green-dark;
   box-shadow: variables.$shadow;
 
   @media (max-width:600px) {
     width: 70px;
     height: 70px;
     margin-top: 20px;
-  }
-
-  &::before {
-    content: '';
-    background-color: variables.$white-medium;
-    width: 23px;
-    height: 23px;
-    border-radius: 100%;
-    transform: translateY(-12px);
-
-    @media (max-width:600px) {
-      width: 10px;
-      height: 10px;
-      transform: translateY(-7px);
-    }
-
   }
 
   &:hover {
@@ -69,25 +49,19 @@
 
 }
 
-.header__logo-text {
-  margin: 0;
-  color: variables.$white-medium;
-  font-weight: 200;
-  line-height: 25px;
-  text-decoration: none;
-  padding-left: 5px;
-
+.header__logo__img {
+  width: 155px;
+  height: 155px;
+  
   @media (max-width:600px) {
-    font-size: 14px;
-    line-height: 14px;
-    padding-left: 2px;
+    width: 70px;
+    height: 70px;
   }
-
 }
 
 .nav {
   flex-grow: 1;
-  margin-top: 70px;
+  margin-top: 40px;
   height: 50px;
   display: flex;
   align-items: center;
@@ -138,7 +112,8 @@
     color: variables.$grey-dark;
     transition: 0.5s;
 
-    &:hover, &:active {
+    &:hover,
+    &:active {
       text-decoration: none;
       color: variables.$green-dark;
       outline: none;
@@ -176,7 +151,8 @@
   transition: 0.5s;
   @include mixins.iconCircle();
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     background-color: variables.$green-dark;
   }
 
