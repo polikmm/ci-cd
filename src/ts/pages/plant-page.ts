@@ -82,7 +82,6 @@ class PlantPage extends Page {
       plant.images.forEach((pic, index) => {
         const img = document.createElement('img');
         img.src = `assets/img/${pic}`;
-        img.loading = 'lazy';
         img.classList.add('product-page__photo-mini');
         img.addEventListener('click', function (e) {
           const target = e.target;
